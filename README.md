@@ -23,3 +23,22 @@ Improved Error Display
 Optimized DOM Updates
 
     Emptied the #newsList before displaying new articles to avoid stacking previous results.
+
+2nd commit:
+Backend (FastAPI):
+
+    Set up API routes for serving quiz questions and handling answers (/quiz/question and /quiz/answer).
+
+    Added CORS middleware to allow cross-origin requests from the frontend.
+
+Frontend (JavaScript):
+
+    Ensured the frontend fetches quiz questions using the correct API endpoint (/quiz/question).
+
+    Handled form submission to send answers to the backend via POST requests.
+
+    Updated UI to show quiz questions and handle score display, attempts, and game-over conditions.
+
+Frontend (HTML):
+
+    Basic structure to display the quiz and handle user interactions (form for answers, score display, etc.).
