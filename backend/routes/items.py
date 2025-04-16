@@ -1,40 +1,46 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from motor.motor_asyncio import AsyncIOMotorClient
+from fastapi import APIRouter, HTTPException
+from models import Item
+from bson import ObjectId
 
-app = FastAPI()
+router = APIRouter()
 
-# ✅ Enable CORS for frontend access
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins (change in production)
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Initialize DB once
+from db import init_db
+db = init_db()
 
-# ✅ MongoDB client
-client = AsyncIOMotorClient("mongodb://localhost:27017")
-db = client["itemdb"]
-collection = db["items"]
+async def get_items_collection():
+    return db["items_collection"]
 
-# ✅ Item schema
-class Item(BaseModel):
-    name: str
-    description: str
-
-# ✅ POST: Add a new item
-@app.post("/items")
-async def add_item(item: Item):
-    result = await collection.insert_one(item.dict())
-    return {"message": "Item added successfully", "id": str(result.inserted_id)}
-
-# ✅ GET: Fetch all items
-@app.get("/items")
+@router.get("/")
 async def get_items():
+    collection = await get_items_collection()
     items = []
-    async for item in collection.find():
-        item["_id"] = str(item["_id"])  # Convert ObjectId to string
-        items.append(item)
+    try:
+        async for item in collection.find():
+            item["_id"] = str(item["_id"])
+            items.append(item)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch items: {str(e)}")
     return items
+
+@router.post("/")
+async def create_item(item: Item):
+    collection = await get_items_collection()
+    try:
+        result = await collection.insert_one(item.dict(exclude={"_id"}))
+        return {"id": str(result.inserted_id)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to create item: {str(e)}")
+
+@router.delete("/{item_id}")
+async def delete_item(item_id: str):
+    collection = await get_items_collection()
+    try:
+        result = await collection.delete_one({"_id": ObjectId(item_id)})
+        if result.deleted_count:
+            return {"status": "deleted"}
+        raise HTTPException(status_code=404, detail="Item not found")
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Invalid item ID")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete item: {str(e)}")
