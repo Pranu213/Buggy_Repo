@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Items</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="items.html">Items</a>
+    <a href="profile.html">Profile</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="news.html">News</a>
+  </nav>
+  <div>
+    <input type="text" id="search" placeholder="Search items..." />
+    <p id="itemCount">Total items: 0</p>
+    <ul id="itemList"></ul>
+  </div>
+  <form id="itemForm">
+    <input type="text" id="name" placeholder="Item name" required />
+    <input type="text" id="description" placeholder="Item description" required />
+    <button type="submit">Add Item</button>
+  </form>
+  <script src="scripts/items.js"></script>
+</body>
+</html>
