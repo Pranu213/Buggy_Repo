@@ -56,6 +56,51 @@ Backend: FastAPI handles API requests, processes data, and interacts with MongoD
 
 Frontend: Uses HTML, CSS, and JavaScript to display interactive charts and graphs.
 
-Installation: Clone the repository, create a virtual environment, install dependencies, and run the FastAPI server.
+
+5th commit:
+----------
+main.py
+
+    Added users_router from routes.users.
+
+    Mounted static/ for JavaScript files using StaticFiles.
+
+    Enabled CORS middleware for frontend-backend communication.
+
+db.py
+
+    Added users_collection to MongoDB init function.
+
+routes/users.py
+
+    Created new router with:
+
+        GET /users/ – fetch all users.
+
+        POST /users/ – add a new user.
+
+        DELETE /users/{user_id} – delete a user.
+
+    Converts ObjectId to str for frontend compatibility.
+
+models.py
+
+    Added User Pydantic model with username and bio.
+
+scripts/profile.js
+
+    Created full user interface logic:
+
+        Load all users.
+
+        Search users (live filter).
+
+        Add new user.
+
+        Delete user.
+
+        Display user count.
+
+
 
 Access: Visit http://127.0.0.1:8001 to interact with the application.
