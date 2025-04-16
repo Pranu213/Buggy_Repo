@@ -46,3 +46,15 @@ Frontend (HTML):
 3rd commit:
 -------------
 deleted the extra js file (home.js) in Buggy_repo/frontend/scripts
+
+4th commit:
+Analytic file,
+Overview: A web application that combines FastAPI, MongoDB, and a front-end using HTML, CSS, and JavaScript for real-time data analytics and visualization.
+
+Backend: FastAPI handles API requests, processes data, and interacts with MongoDB to store and retrieve analytics data.
+
+Frontend: Uses HTML, CSS, and JavaScript to display interactive charts and graphs.
+
+Installation: Clone the repository, create a virtual environment, install dependencies, and run the FastAPI server.
+
+Access: Visit http://127.0.0.1:8001 to interact with the application.
