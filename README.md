@@ -25,6 +25,7 @@ Optimized DOM Updates
     Emptied the #newsList before displaying new articles to avoid stacking previous results.
 
 2nd commit:
+------------
 Backend (FastAPI):
 
     Set up API routes for serving quiz questions and handling answers (/quiz/question and /quiz/answer).
