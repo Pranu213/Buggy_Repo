@@ -43,3 +43,6 @@ Frontend (JavaScript):
 Frontend (HTML):
 
     Basic structure to display the quiz and handle user interactions (form for answers, score display, etc.).
+3rd commit:
+-------------
+deleted the extra js file (home.js) in Buggy_repo/frontend/scripts
