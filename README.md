@@ -48,6 +48,7 @@ Frontend (HTML):
 deleted the extra js file (home.js) in Buggy_repo/frontend/scripts
 
 4th commit:
+-------------
 Analytic file,
 Overview: A web application that combines FastAPI, MongoDB, and a front-end using HTML, CSS, and JavaScript for real-time data analytics and visualization.
 
